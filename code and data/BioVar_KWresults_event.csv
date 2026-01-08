@@ -1,0 +1,3 @@
+"","Variable","Chi_Squared","df","p_value_formatted","p_adj_BH","Significance"
+"1","Biomass_per_Area",27.572,2,"<0.001",2.05985945909396e-06,"***"
+"2","Transect",1.0162,2,"0.602",0.6016433256526,"ns"
