@@ -86,10 +86,11 @@ NEP_panel <- ggplot(data=df, aes(x=Date, y=NEP50, col=Canal))+
   labs(y=expression(paste("NEP (g ", O[2], " ", m^-2, " ", d^-1,")")))+
   geom_hline(yintercept = 0, size = 0.75)+
   theme(panel.grid.minor = element_blank(),
-        axis.text=element_text(size=10),
+        axis.text.x = element_blank(),
         axis.title = element_text(size=12),
         axis.title.x = element_blank(),
         legend.position = "none")+
+  coord_cartesian(ylim = c(-17, 8), clip = "off")+
   scale_x_date(limits = as.Date(c("2021-04-01", "2021-08-10")),
                date_breaks = "1 month", date_labels = "%b")
 
@@ -101,7 +102,7 @@ Biomass_panel <- ggplot(data = B_summary, aes(x = Date, y = Mean_Biomass))+
                 width = 0.2,
                 position=position_dodge(0.9),
                 stat="identity", size = 1)+
-  labs(y = expression(paste("Biomass per area (g ", m^-2,")")))+
+  labs(y = expression(paste("Biomass (g"," ", m^-2,")")))+
   theme_bw()+
   theme(panel.grid.minor = element_blank(),
         axis.text=element_text(size=10),
@@ -111,24 +112,18 @@ Biomass_panel <- ggplot(data = B_summary, aes(x = Date, y = Mean_Biomass))+
                date_breaks = "1 month", date_labels = "%b")
 
 
+graph2<-plot_grid(NEP_panel, NULL, Biomass_panel,
+                  rel_heights = c(1, -0.05, 1.15), ncol=1,
+                  align="v", scale=0.95, labels = c("B","C"))
+graph2
+
 ########################################
 ## Figure 3 all together
 ########################################
 
-plot_grid(
-  plot_grid(
-    
-    graph1,
-    
-    plot_grid(
-      
-      NEP_panel,
-      
-      Biomass_panel,
-      
-      align = "hv", nrow = 2, labels = c("B","C")),
-    
-    nrow = 1, ncol = 2, align = "hv", labels = c("A","")),
-  
-  NULL, leg, nrow = 3, rel_heights = c(1, -0.05, 0.15))
+plot_grid(plot_grid(graph1, graph2, nrow = 1, ncol = 2, align = "hv", labels = c("A","")),
+          NULL, leg, nrow = 3, rel_heights = c(1, -0.05, 0.15))
+
+
+
 
