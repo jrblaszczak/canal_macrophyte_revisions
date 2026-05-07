@@ -35,7 +35,6 @@ tt$TravelTime_seconds <- tt$Length/tt$Velocity
 tt$TravelTime_hours <- tt$TravelTime_seconds/3600
 
 ## Calculate the mean travel time per canal
-
 tt %>%
   group_by(Canal) %>%
   summarise_at(.vars = 'TravelTime_hours', .funs = mean)

@@ -15,6 +15,10 @@ df$NEP50 <- df$GPP50 + df$ER50
 #Make Canal a factor
 df$Canal<-as.factor(df$Canal)
 
+#Summarize mean values across all canals and all dates
+df %>%
+  summarise_at(.vars = c('GPP50','ER50'), .funs = mean)
+
 #Kruskal Wallis test - Canal
 kruskal.test(GPP50 ~ Canal, df) #NS
 kruskal.test(ER50 ~ Canal, df) #p < 0.05
