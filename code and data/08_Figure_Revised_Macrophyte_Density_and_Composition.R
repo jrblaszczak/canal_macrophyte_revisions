@@ -36,7 +36,7 @@ g1 <- ggplot(canal_all_data, aes(x = Canal, y = Biomass_per_Area, fill = fill.or
   facet_grid(~ Event_name)+
   theme_bw(base_size = 12)+
   theme(strip.background=element_rect(fill="white"))+
-  scale_fill_manual("Canal", values = c("A" = "#E69F00","UL" = "#0072B2", "DL" = "#CC79A7"))+
+  scale_fill_manual("Canal", values = c("A" = "#E69F00","UL" = "#0072B2", "DL" = "#009E73"))+
   labs(y=expression(paste("Biomass per area (g AFDM ", m^-2,")")))+
   theme(axis.title.x = element_blank())
 g1

@@ -34,7 +34,7 @@ colnames(B_summary) <- c("Canal","Event","Date","Mean_Biomass", "SD_Biomass")
 g1<-ggplot(data=df, aes(x=Date, y=GPP50, color=Canal))+
   geom_point(size=3)+theme_bw()+
   geom_errorbar(aes(ymin=GPP2.5, ymax=GPP97.5), size=0.5,width = 0.2)+
-  scale_color_manual("Canal", values = c("A" = "#6393A6","UL" = "#733B36", "DL" = "#BF785E"))+
+  scale_color_manual("Canal", values = c("A" = "#E69F00","UL" = "#0072B2", "DL" = "#009E73"))+
   labs(y=expression(paste("GPP (g ", O[2], " ", m^-2, " ", d^-1,")")))+
   theme(panel.grid.minor = element_blank(),
         axis.text.x = element_blank(),
@@ -53,15 +53,15 @@ g1+theme(legend.position = "bottom")
 g2<-ggplot(data=df, aes(x=Date, y=ER50, color=Canal))+
   geom_point(size=3)+theme_bw()+
   geom_errorbar(aes(ymin=ER2.5, ymax=ER97.5), size=0.5, width = 0.5)+
-  scale_color_manual("Canal", values = c("A" = "#6393A6","UL" = "#733B36", "DL" = "#BF785E"))+
+  scale_color_manual("Canal", values = c("A" = "#E69F00","UL" = "#0072B2", "DL" = "#009E73"))+
   labs(y=expression(paste("ER (g ", O[2], " ", m^-2, " ", d^-1,")")))+
   theme(legend.position = "none",
         panel.grid.minor = element_blank(),
         axis.text=element_text(size=10),
         axis.title = element_text(size=12))+
-  annotate("segment", x = subset(B_summary, Canal=="A")$Date, xend = subset(B_summary, Canal=="A")$Date, y = 0, yend = 10, colour = "#6393A6", size=0.8, arrow = arrow(ends = "both", angle = 45, length = unit(.2,"cm")))+
-  annotate("segment", x = subset(B_summary, Canal=="UL")$Date, xend = subset(B_summary, Canal=="UL")$Date, y = 0, yend = 10, colour = "#733B36", size=0.8, arrow = arrow(ends = "both", angle = 45, length = unit(.2,"cm")))+
-  annotate("segment", x = subset(B_summary, Canal=="DL")$Date, xend = subset(B_summary, Canal=="DL")$Date, y = 0, yend = 10, colour = "#BF785E", size=0.8, arrow = arrow(ends = "both", angle = 45, length = unit(.2,"cm")))+
+  annotate("segment", x = subset(B_summary, Canal=="A")$Date, xend = subset(B_summary, Canal=="A")$Date, y = 0, yend = 10, colour = "#E69F00", size=0.8, arrow = arrow(ends = "both", angle = 45, length = unit(.2,"cm")))+
+  annotate("segment", x = subset(B_summary, Canal=="UL")$Date, xend = subset(B_summary, Canal=="UL")$Date, y = 0, yend = 10, colour = "#0072B2", size=0.8, arrow = arrow(ends = "both", angle = 45, length = unit(.2,"cm")))+
+  annotate("segment", x = subset(B_summary, Canal=="DL")$Date, xend = subset(B_summary, Canal=="DL")$Date, y = 0, yend = 10, colour = "#009E73", size=0.8, arrow = arrow(ends = "both", angle = 45, length = unit(.2,"cm")))+
   coord_cartesian(ylim = c(-40,0), clip = "off")+
   scale_x_date(limits = as.Date(c("2021-04-01", "2021-08-10")),
                date_breaks = "1 month", date_labels = "%b")
@@ -82,7 +82,7 @@ plot_grid(graph1, NULL, leg, nrow = 3, rel_heights = c(1, -0.05, 0.15))#Add lege
 # NEP panel
 NEP_panel <- ggplot(data=df, aes(x=Date, y=NEP50, col=Canal))+
   geom_point(size=3)+theme_bw()+
-  scale_color_manual(values = c("A" = "#6393A6","UL" = "#733B36", "DL" = "#BF785E"))+
+  scale_color_manual(values = c("A" = "#E69F00","UL" = "#0072B2", "DL" = "#009E73"))+
   labs(y=expression(paste("NEP (g ", O[2], " ", m^-2, " ", d^-1,")")))+
   geom_hline(yintercept = 0, size = 0.75)+
   theme(panel.grid.minor = element_blank(),
@@ -97,7 +97,7 @@ NEP_panel <- ggplot(data=df, aes(x=Date, y=NEP50, col=Canal))+
 # Biomass panel
 Biomass_panel <- ggplot(data = B_summary, aes(x = Date, y = Mean_Biomass))+
   geom_point(aes(color=Canal), stat = 'identity', size = 3)+
-  scale_color_manual(values = c("A" = "#6393A6","UL" = "#733B36", "DL" = "#BF785E"))+
+  scale_color_manual(values = c("A" = "#E69F00","UL" = "#0072B2", "DL" = "#009E73"))+
   geom_errorbar(aes(ymin=Mean_Biomass-SD_Biomass, ymax=Mean_Biomass+SD_Biomass, color = Canal),
                 width = 0.2,
                 position=position_dodge(0.9),
