@@ -9,10 +9,10 @@ lapply(c("plyr","dplyr","ggplot2","cowplot",
          "lubridate","tidyverse"), require, character.only=T)
 
 ##### Read in Data #####
-canal_aves <- read.csv("../Data_Final/Macrophyte_Density_SiteAverages.csv")
-canal_sp_aves <- read.csv("../Data_Final/Macrophyte_Composition_SiteAverages.csv")
+canal_aves <- read.csv("Macrophyte_Density_SiteAverages.csv")
+canal_sp_aves <- read.csv("Macrophyte_Composition_SiteAverages.csv")
 
-canal_all_data <- read.csv("../Data_Final/Environmental_and_Macrophyte_AllObservations.csv")
+canal_all_data <- read.csv("Environmental_and_Macrophyte_AllObservations.csv")
 
 ## Rename events
 canal_all_data$Event_name <- revalue(as.factor(canal_all_data$Event),
@@ -27,6 +27,7 @@ canal_sp_aves$Event_name <- revalue(as.factor(canal_sp_aves$Event),
 
 
 ##### Macrophyte Density Plot #####
+## Colors chosen from Okabe-Ito Palette (https://www.audioeye.com/post/colorblind-friendly-palettes/)
 fill.order <- factor(canal_all_data$Canal, levels = c('UL', 'DL', 'A'))#creating fill order so that it is in correct sampling order
 
 g1 <- ggplot(canal_all_data, aes(x = Canal, y = Biomass_per_Area, fill = fill.order))+
@@ -35,7 +36,7 @@ g1 <- ggplot(canal_all_data, aes(x = Canal, y = Biomass_per_Area, fill = fill.or
   facet_grid(~ Event_name)+
   theme_bw(base_size = 12)+
   theme(strip.background=element_rect(fill="white"))+
-  scale_fill_manual("Canal", values = c("A" = "#6393A6","UL" = "#733B36", "DL" = "#BF785E"))+
+  scale_fill_manual("Canal", values = c("A" = "#E69F00","UL" = "#0072B2", "DL" = "#CC79A7"))+
   labs(y=expression(paste("Biomass per area (g AFDM ", m^-2,")")))+
   theme(axis.title.x = element_blank())
 g1
