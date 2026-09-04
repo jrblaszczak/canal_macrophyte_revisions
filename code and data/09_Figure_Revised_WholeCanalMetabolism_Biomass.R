@@ -39,10 +39,10 @@ g1<-ggplot(data=df, aes(x=Date, y=GPP50, color=Canal))+
   theme(panel.grid.minor = element_blank(),
         axis.text.x = element_blank(),
         legend.direction = "horizontal",
+        panel.grid.major = element_blank(),
         axis.title.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        axis.text=element_text(size=10),
-        axis.title = element_text(size=12))+
+        axis.text=element_text(size=12),
+        axis.title = element_text(size=14))+
   coord_cartesian(ylim = c(0, 40), clip = "off")+
   scale_x_date(limits = as.Date(c("2021-04-01", "2021-08-10")),
                date_breaks = "1 month", date_labels = "%b")
@@ -57,8 +57,9 @@ g2<-ggplot(data=df, aes(x=Date, y=ER50, color=Canal))+
   labs(y=expression(paste("ER (g ", O[2], " ", m^-2, " ", d^-1,")")))+
   theme(legend.position = "none",
         panel.grid.minor = element_blank(),
-        axis.text=element_text(size=10),
-        axis.title = element_text(size=12))+
+        panel.grid.major = element_blank(),
+        axis.text=element_text(size=12),
+        axis.title = element_text(size=14))+
   annotate("segment", x = subset(B_summary, Canal=="A")$Date, xend = subset(B_summary, Canal=="A")$Date, y = 0, yend = 10, colour = "#E69F00", size=0.8, arrow = arrow(ends = "both", angle = 45, length = unit(.2,"cm")))+
   annotate("segment", x = subset(B_summary, Canal=="UL")$Date, xend = subset(B_summary, Canal=="UL")$Date, y = 0, yend = 10, colour = "#0072B2", size=0.8, arrow = arrow(ends = "both", angle = 45, length = unit(.2,"cm")))+
   annotate("segment", x = subset(B_summary, Canal=="DL")$Date, xend = subset(B_summary, Canal=="DL")$Date, y = 0, yend = 10, colour = "#009E73", size=0.8, arrow = arrow(ends = "both", angle = 45, length = unit(.2,"cm")))+
@@ -86,13 +87,16 @@ NEP_panel <- ggplot(data=df, aes(x=Date, y=NEP50, col=Canal))+
   labs(y=expression(paste("NEP (g ", O[2], " ", m^-2, " ", d^-1,")")))+
   geom_hline(yintercept = 0, size = 0.75)+
   theme(panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
         axis.text.x = element_blank(),
-        axis.title = element_text(size=12),
+        axis.text.y = element_text(size=12),
+        axis.title = element_text(size=14),
         axis.title.x = element_blank(),
         legend.position = "none")+
   coord_cartesian(ylim = c(-17, 8), clip = "off")+
   scale_x_date(limits = as.Date(c("2021-04-01", "2021-08-10")),
                date_breaks = "1 month", date_labels = "%b")
+NEP_panel
 
 # Biomass panel
 Biomass_panel <- ggplot(data = B_summary, aes(x = Date, y = Mean_Biomass))+
@@ -102,11 +106,12 @@ Biomass_panel <- ggplot(data = B_summary, aes(x = Date, y = Mean_Biomass))+
                 width = 0.2,
                 position=position_dodge(0.9),
                 stat="identity", size = 1)+
-  labs(y = expression(paste("Biomass (g"," ", m^-2,")")))+
+  labs(y = expression(paste("Biomass (g /"," ", m^2,")")))+
   theme_bw()+
   theme(panel.grid.minor = element_blank(),
-        axis.text=element_text(size=10),
-        axis.title = element_text(size=12),
+        panel.grid.major = element_blank(),
+        axis.text=element_text(size=12),
+        axis.title = element_text(size=14),
         legend.position = "none")+
   scale_x_date(limits = as.Date(c("2021-04-01", "2021-08-10")),
                date_breaks = "1 month", date_labels = "%b")
